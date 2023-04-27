@@ -28,10 +28,10 @@ y = data['shop_profile']
 
 # for i in range(1, 350):
 # Split the data into train and test sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=167)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=131)
 
 # Train the RandomForestClassifier
-classifier = RandomForestClassifier(n_estimators=111, random_state=140)
+classifier = RandomForestClassifier(n_estimators=111, random_state=190)
 classifier.fit(X_train, y_train)
 
 # Predict the shop profiles for the test data
