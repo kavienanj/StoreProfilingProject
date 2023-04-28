@@ -1,6 +1,6 @@
 import pandas as pd
 
-transaction_data = pd.read_csv('data/Historical-transaction-data.csv')
+transaction_data = pd.read_csv('./data/Historical-transaction-data.csv')
 
 # Drop rows with less than 1 values for quantity_sold
 initial_quantity_sold_count = len(transaction_data)

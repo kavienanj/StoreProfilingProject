@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load cleaned data
-cleaned_data = pd.read_csv('data/Historical-transaction-cleaned-data.csv')
+cleaned_data = pd.read_csv('./data/Historical-transaction-cleaned-data.csv')
 cleaned_data["invoice_id"] = cleaned_data["invoice_id"].astype(int)
 cleaned_data["transaction_date"] = pd.to_datetime(cleaned_data["transaction_date"])
 
@@ -21,11 +21,11 @@ features = cleaned_data.groupby('shop_id').agg(
 )
 
 # Load store info data
-store_info = pd.read_csv('data/Store-info.csv')
+store_info = pd.read_csv('./data/Store-info.csv')
 store_info = store_info[['shop_id', 'shop_area_sq_ft']]
 
 # Merge store area data with the features
 combined_features = features.reset_index().merge(store_info, on='shop_id', how='left')
 
 # Save the combined features as a new CSV file
-combined_features.to_csv('data/Shop_Features.csv', index=False)
+combined_features.to_csv('./data/Shop_Features.csv', index=False)
