@@ -13,7 +13,6 @@ cleaned_data['weekend_transaction'] = cleaned_data['transaction_date'].dt.weekda
 features = cleaned_data.groupby('shop_id').agg(
     total_sales=('sales', 'sum'),
     total_quantity_sold=('quantity_sold', 'sum'),
-    max_item_price=('item_price', 'max'),
     mean_item_price=('item_price', 'mean'),
     total_bills=('invoice_id', pd.Series.nunique),
     total_transactions=('transaction_date', 'count'),
@@ -22,6 +21,10 @@ features = cleaned_data.groupby('shop_id').agg(
     weekday_transactions=('weekend_transaction', lambda x: x.value_counts()[False]),
     weekend_transactions=('weekend_transaction', lambda x: x.value_counts()[True]),
 )
+
+# Additional features, refer feature_selection.ipynb
+features['product_customer_per_transaction'] = features['total_customers'] * features['total_transactions']
+features['bills_per_customer'] = features['total_bills'] / features['total_customers']
 
 # Load store info data
 store_info = pd.read_csv('./data/Store-info.csv')
